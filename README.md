@@ -1,1 +1,1 @@
-# vault-companion
+# valut-companion
