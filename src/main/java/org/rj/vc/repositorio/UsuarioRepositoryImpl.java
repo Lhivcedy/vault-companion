@@ -1,20 +1,19 @@
 package org.rj.vc.repositorio;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import org.rj.vc.anotaciones.Repository;
 import org.rj.vc.entidades.Usuario;
 import org.rj.vc.repositorio.interfaces.UsuarioRepository;
 
 import java.util.List;
 
 @SuppressWarnings("ALL")
-@Repository
+@RequestScoped
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
     @Inject
     private EntityManager em;
-
 
     @Override
     public List<Usuario> listar() {
@@ -43,5 +42,12 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
         Usuario u = this.porId(id);
         em.remove(em.merge(u));
         return true;
+    }
+
+    @Override
+    public Usuario porNombreUsuario(String nombreUsuario) {
+        return em.createQuery("SELECT u FROM Usuario u LEFT OUTER JOIN FETCH u.rol WHERE u.nombreUsuario = :nombreUsuario", Usuario.class)
+                .setParameter("nombreUsuario", nombreUsuario.toUpperCase())
+                .getSingleResult();
     }
 }

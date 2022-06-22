@@ -1,9 +1,9 @@
 package org.rj.vc.entidades;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.rj.vc.utils.Encriptar;
 
 import java.text.SimpleDateFormat;
@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 @Setter
 @Entity
 @Table(name = "usuario")
+@ToString
 public class Usuario {
 
     @Id
@@ -46,8 +47,6 @@ public class Usuario {
     private String estado;
 
     @Embedded
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     private Auditoria auditoria = new Auditoria();
 
     @PrePersist

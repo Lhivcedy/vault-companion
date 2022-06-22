@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition lang="#{lenguaje.locale}"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="WEB-INF/layouts/layout.xhtml">
+
+    <ui:define name="contenido">
+        <div class="card p-0 col-xxl-6 col-xl-7 col-lg-9 col-md-9 col-sm-12 mt-5 mx-auto">
+            <div class="card-header">
+                <h3><h:outputText value="#{i18n['app.texto.login.card']}"/></h3>
+            </div>
+            <div class="card-body">
+                <h:form>
+                    <div class="form-group">
+                        <h:outputLabel value="#{i18n['app.texto.login.usuario']}" for="txtUser">
+                            <f:passThroughAttribute name="class" value="my-2"/>
+                        </h:outputLabel>
+                        <h:inputText value="#{login.usuarioDto.nombreUsuario}" id="txtUser">
+                            <f:passThroughAttribute name="onkeyup" value="if (/[^|a-zA-Z0-9]+/g.test(this.value))
+                            this.value = this.value.replace(/[^|a-zA-Z0-9]+/g, '')"/>
+                            <f:passThroughAttribute name="class" value="form-control"/>
+                            <f:passThroughAttribute name="placeholder"
+                                                    value="#{i18n['app.texto.login.usuario.placeholder']}"/>
+                        </h:inputText>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="#{i18n['app.texto.login.password']}" for="txtUser">
+                            <f:passThroughAttribute name="class" value="my-2"/>
+                        </h:outputLabel>
+                        <h:inputSecret value="#{login.usuarioDto.contrasena}" id="txtPassword">
+                            <f:passThroughAttribute name="class" value="form-control"/>
+                            <f:passThroughAttribute name="placeholder"
+                                                    value="#{i18n['app.texto.login.password.placeholder']}"/>
+                        </h:inputSecret>
+                    </div>
+                    <h:commandButton value="#{i18n['app.texto.login.boton']}" action="#{login.validarLogin}">
+                        <f:passThroughAttribute name="class" value="btn btn-outline-primary mt-3"/>
+                    </h:commandButton>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
